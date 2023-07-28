@@ -1,0 +1,57 @@
+name: 'Project-JAAB'
+description: 'Create a JMP Addin with repository files and optional other repository files.'
+inputs:
+  token:
+    description: 'Security token to use as access to certain repositories. Required for private repositories'
+  owner_repo:
+    description: 'The repo owner and repo name that has triggered the action.'
+    required: true
+    default: ${{github.repository}}
+  run_id:
+    description: 'The run reference id that triggered the action.'
+    required: true
+    default: ${{github.event.release.id}}
+  prod_path:
+    description: 'The pathway for the production release of the addin.'
+    required: true
+  test_path:
+    description: 'The pathway for the test release of the addin.'
+    required: true
+  addin_id:
+    description: 'The addin ID which is how JMP recognizes the addin. Usually in the format com.company.namehere'
+    required: true
+  addin_name:
+    description: 'The addin name'
+    required: true
+  jmpcust_txt_file:
+    description: 'The File name for the file that explains to JMP how to create the menu format. Must exist in the .github/workflows in a specific format (see action README.md)'
+    required: true
+  author:
+    description: 'The author of the addin. Default is empty'
+    required: false
+    default: ''
+  external_files:
+    description: 'File name that ends with the suffix .ini that exists in the .github/workflows in a specific format (see action README.md) that gives information about other repos to include files from in the addin build.'
+    required: false
+  tag_suffix:
+    description: 'Boolean. The final addin includes the version tag at the end in the addin name. Set to 1 to include it. Set to 0 to exclude it. Default is 1.'
+    required: false
+    default: 1
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        python "${{ github.action_path }}/AddinBuilder.py"
+      shell: bash
+      env:
+        Token: ${{ inputs.token }}
+        OwnerRepo: ${{ inputs.owner_repo }}
+        RunID: ${{ inputs.run_id }}
+        ProdPath: ${{ inputs.prod_path }}
+        TestPath: ${{ inputs.test_path }}
+        AddinID: ${{ inputs.addin_id }}
+        AddinName: ${{ inputs.addin_name }}
+        Author: ${{ inputs.author }}
+        ExternalFiles: ${{ inputs.external_files }}
+        TagSuffix: ${{ inputs.tag_suffix }}
+        JmpCust: ${{ inputs.jmpcust_txt_file }}
