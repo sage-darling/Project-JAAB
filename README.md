@@ -15,8 +15,7 @@ After an access token is created, it can be added to the repository utilizing th
 This text file should be located in the .github/workflows and can be named any name. This name will be input in the `jmpcust_txt_file` input field and is a required input. This file allows for flexibility for how the JMP Menu looks and where the addin is added and shows to the user.
 
 Basic File format WITHOUT edits:
-`
-<!-- JMP Add-In Builder created --><jm:menu_and_toolbar_customizations xmlns:jm="http://www.jmp.com/ns/menu" version="3">
+`<!-- JMP Add-In Builder created --><jm:menu_and_toolbar_customizations xmlns:jm="http://www.jmp.com/ns/menu" version="3">
 <jm:insert_in_main_menu>
     <jm:insert_after>
         <jm:name></jm:name>
@@ -39,9 +38,10 @@ Basic File format WITHOUT edits:
         </jm:menu>
     </jm:insert_after>
 </jm:insert_in_main_menu>
-</jm:menu_and_toolbar_customizations>
-`
+</jm:menu_and_toolbar_customizations>`
+
 What does this file look like?:
+![image](https://github.com/sage-darling/Project-JAAB/assets/103757629/82d1db1b-0bfa-4436-8182-3e73ee956fc0)
 
 How to make the necessary edits:
 `[Header Name]`: edit this area of the template to say the naming you would like in the overarching menu location. This is the first section individuals will see and is the header item. In the case above, this is `Header Item`.
