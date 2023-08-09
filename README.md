@@ -15,7 +15,8 @@ After an access token is created, it can be added to the repository utilizing th
 This text file should be located in the .github/workflows and can be named any name. This name will be input in the `jmpcust_txt_file` input field and is a required input. This file allows for flexibility for how the JMP Menu looks and where the addin is added and shows to the user.
 
 Basic File format WITHOUT edits:
-```<!-- JMP Add-In Builder created --><jm:menu_and_toolbar_customizations xmlns:jm="http://www.jmp.com/ns/menu" version="3">
+```
+<!-- JMP Add-In Builder created --><jm:menu_and_toolbar_customizations xmlns:jm="http://www.jmp.com/ns/menu" version="3">
 <jm:insert_in_main_menu>
     <jm:insert_after>
         <jm:name></jm:name>
@@ -38,7 +39,8 @@ Basic File format WITHOUT edits:
         </jm:menu>
     </jm:insert_after>
 </jm:insert_in_main_menu>
-</jm:menu_and_toolbar_customizations>```
+</jm:menu_and_toolbar_customizations>
+```
 
 What does this file look like when implemented?:
 ![image](https://github.com/sage-darling/Project-JAAB/assets/103757629/82d1db1b-0bfa-4436-8182-3e73ee956fc0)
@@ -75,7 +77,6 @@ This is the format of the .ini file:
 ; repository release version is optional and defaults to latest release.
 ; example usage: 1 = sage-darling, scaling-octo-telegram, utilities.jsl, utilities.jsl, Utilities, v1.0.0
 1 = owner, repo, script-to-include.jsl, name-to-call-it.jsl, foldername, version-number
-
 ```
 
 ## Inputs
