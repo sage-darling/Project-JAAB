@@ -15,7 +15,7 @@ After an access token is created, it can be added to the repository utilizing th
 This text file should be located in the .github/workflows and can be named any name. This name will be input in the `jmpcust_txt_file` input field and is a required input. This file allows for flexibility for how the JMP Menu looks and where the addin is added and shows to the user.
 
 Basic File format WITHOUT edits:
-`<!-- JMP Add-In Builder created --><jm:menu_and_toolbar_customizations xmlns:jm="http://www.jmp.com/ns/menu" version="3">
+```<!-- JMP Add-In Builder created --><jm:menu_and_toolbar_customizations xmlns:jm="http://www.jmp.com/ns/menu" version="3">
 <jm:insert_in_main_menu>
     <jm:insert_after>
         <jm:name></jm:name>
@@ -38,9 +38,9 @@ Basic File format WITHOUT edits:
         </jm:menu>
     </jm:insert_after>
 </jm:insert_in_main_menu>
-</jm:menu_and_toolbar_customizations>`
+</jm:menu_and_toolbar_customizations>```
 
-What does this file look like?:
+What does this file look like when implemented?:
 ![image](https://github.com/sage-darling/Project-JAAB/assets/103757629/82d1db1b-0bfa-4436-8182-3e73ee956fc0)
 
 How to make the necessary edits:
@@ -58,10 +58,24 @@ How to make the necessary edits:
 
 `[Choose a symbol]`: Here you can get creative about what you want your symbol to look like! This is the symbol that exists next to `addin name everyone sees`. JMP has many `"builtin"` ones you can leverage by using the name that JMP recognizes. If you are unsure, an Addin exists [here](https://community.jmp.com/t5/JMP-Add-Ins/Built-In-JMP-Icons/ta-p/42251#:~:text=Description,be%20set%20as%20window%20icons.) that can help you pick what this is. Find your symbol from this addin, click it, find the Icon Name, and paste that into the `[Choose a symbol]` location.
 
-Now your jmpcust.txt is complete! :sparkles: :sparkles:
+Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
 
 ## Optional Prerequisites
 **A .ini file**
+The .ini file will be required to include files from other repositories for packaging but it is overall option. To use, the file needs to be added to the .github/workflows area of the repo using this action. The name of this file is in an input for `external_files`.
 
+This is the format of the .ini file:
+
+```
+[external_files]
+; ***how to write to get the file you want from other repositories***
+; arbitary number = name of owner of repostiory, name of repository, name of the file you want exactly as it's written in the repo, name to call the file in the addin, folder to add it into the addin, repository release version number
+; arbitary number means to start with 1 and continue by adding 1 to the number for every new file you'd like to include.
+; empty folder location is optional defaults to the main folder of the addin.
+; repository release version is optional and defaults to latest release.
+; example usage: 1 = sage-darling, scaling-octo-telegram, utilities.jsl, utilities.jsl, Utilities, v1.0.0
+1 = owner, repo, script-to-include.jsl, name-to-call-it.jsl, foldername, version-number
+
+```
 
 ## Inputs
