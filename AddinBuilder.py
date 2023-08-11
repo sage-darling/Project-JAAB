@@ -589,18 +589,18 @@ def pack_up_externals(externalsDict, runnerlocation, token):
                
 def externals_data(owner_repo, token, version="latest"):
     '''
-    gathers the data in a dictionary related to the files needed to be packaged in the final Addin from idexx-jmp-datum/JMP_DATUM_Libraries.
+    gathers the data in a dictionary related to the files needed to be packaged in the final Addin from another owner and repo.
     
     Args:
         owner_repo (string): the owner and repo to query for the Github Release information.
         token (string): Github authentication token produced and recognized by github for authentication to a private repo.
-        version (string): defaults to latest. Can be overruled to be whatever version of the JMP_DATUM_Libraries that is needed.
+        version (string): defaults to latest. Can be overruled to be whatever version of the file is needed.
 
     Returns:
         a dictionary with the filename, download URL, and filetype for the library files.
 
     Example Usage:
-        >>> libs_info = libs_data("idexx-jmp-datum/JMP_DATUM_Libraries", TOKEN, main_vars['lib_tag'])
+        >>> libs_info = libs_data("octocat/libraries", TOKEN, main_vars['lib_tag'])
     '''
     # start with a blank dictionary
     repo_dict = {}

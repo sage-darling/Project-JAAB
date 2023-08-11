@@ -4,14 +4,20 @@ This action is used to retrieve files from the github repository that is using t
 ## Whatcha Lookin' For?
 - [Mandatory Prerequisites](#Mandatory-Prerequisites)
 - [Optional Prerequisites](#optional-prerequisites)
+- [Inputs](#inputs)
+- [Usage](#usage)
 
 ## Mandatory Prerequisites
+
 Before building an addin with the Project-JAAB action, the following prerequisities must be met:
+
 **GitHub Token:**
+
 A token is required as an input to Project-JAAB when accessing private repositories for the addin compilation. This will be passed into the action as an input under `token`. Github documentation related to managing and creating personal access tokens can be found [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#about-personal-access-tokens). The token should have read and write permissions. 
 After an access token is created, it can be added to the repository utilizing the action by navigating to the repository -> Settings -> Secrets and variables -> Actions -> New repository secret
 
 **Text File in .github/workflows of the Repository to describe the JMP Addin Menu Format**
+
 This text file should be located in the .github/workflows and can be named any name. This name will be input in the `jmpcust_txt_file` input field and is a required input. This file allows for flexibility for how the JMP Menu looks and where the addin is added and shows to the user.
 
 Basic File format WITHOUT edits:
@@ -63,20 +69,77 @@ How to make the necessary edits:
 Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
 
 ## Optional Prerequisites
-**A .ini file**
-The .ini file will be required to include files from other repositories for packaging but it is overall option. To use, the file needs to be added to the .github/workflows area of the repo using this action. The name of this file is in an input for `external_files`.
 
-This is the format of the .ini file:
+**A .ini file**
+
+The .ini file will be required to include files from other repositories for packaging but it is overall optional. To use, the file needs to be added to the .github/workflows area of the repo using this action. The name of this file is in an input for `external_files`.
+
+This is the format of the .ini file when importing 1 file:
 
 ```
 [external_files]
 ; ***how to write to get the file you want from other repositories***
 ; arbitary number = name of owner of repostiory, name of repository, name of the file you want exactly as it's written in the repo, name to call the file in the addin, folder to add it into the addin, repository release version number
 ; arbitary number means to start with 1 and continue by adding 1 to the number for every new file you'd like to include.
-; empty folder location is optional defaults to the main folder of the addin.
+; if the folder to place the file in is in the Main folder, write Main in the foldername location. Otherwise, a new folder will be made inside the addin by the name written here.
 ; repository release version is optional and defaults to latest release.
-; example usage: 1 = sage-darling, scaling-octo-telegram, utilities.jsl, utilities.jsl, Utilities, v1.0.0
-1 = owner, repo, script-to-include.jsl, name-to-call-it.jsl, foldername, version-number
+; inputs are separated by commas.
+1 = owner, repo, script-to-include, name-to-call-it, foldername, version-number
 ```
 
+This is the format of the .ini file when importing more than 1 file:
+
+```
+[external_files]
+; ***how to write to get the file you want from other repositories***
+; arbitary number = name of owner of repostiory, name of repository, name of the file you want exactly as it's written in the repo, name to call the file in the addin, folder to add it into the addin, repository release version number
+; arbitary number means to start with 1 and continue by adding 1 to the number for every new file you'd like to include.
+; if the folder to place the file in is in the Main folder, write Main in the foldername location. Otherwise, a new folder will be made inside the addin by the name written here.
+; repository release version is optional and defaults to latest release.
+; inputs are separated by commas.
+1 = owner, repo, script-to-include, name-to-call-it, foldername, version-number
+2 = owner, repo, script-to-include, name-to-call-it, foldername, version-number
+```
+
+All inputs are case sensitive. Replace where it says `owner` with the owner of the github repository for the file you wish to include. Next, replace where it says `repo` with the name of the repository that houses the file. After, write the name of the script that's located in the remote repository that you would like to include in the `script-to-include` location. Don't forget the extension type (ex. .jsl). In a similar format, write the name to call the script in your addin in the `name-to-call-it` location. Don't forget the extension type here as well. Next write the folder name in the `foldername` location. If you would like this in the main folder with your .jsl script, write "main" here. Otherwise, put whatever name you wish! Lastly, replace `version-number` with the version number of the file you'd like from the remote repository. This defaults to latest if it does not exist.
+
+Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
+
 ## Inputs
+
+| Name | Description | Default | Required |
+| ---- | ----------- | ------- | -------- |
+| token | security token | N/A | false but needed for private repos |
+| owner_repo | repo owner and name using the addin | ${{github.repository}} | true |
+| run_id | run reference id created from publishing | ${{github.event.release.id}} | true |
+| prod_path | the pathway where the production release will be saved | N/A | true |
+| test_path | the pathway where the test release will be saved | N/A | true |
+| addin_id | the addin id. usually in the format com.company.addin | N/A | true |
+| addin_name | the name of the addin | N/A | true |
+| jmpcust_txt_file | the filename for the text file in [Mandatory Prerequisites](#Mandatory-Prerequisites) to create the addin menu | N/A | true |
+| author | the author of the addin. | Empty | true |
+| tag_suffix | whether the final addin includes version tag in the filename. 1 to include. 0 to exclude. | 1 | true |
+| external_files | the .ini file in the [Optional Prerequisites](#optional-prerequisites) for including external files | N/A | false |
+
+## Usage
+
+```
+on:
+  release:
+    types:
+      - published
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Example Addin Build with Project JAAB
+        id: Project-JAAB
+        uses: sage-darling/Project-JAAB@v1.0.0
+        with:
+          prod_path: 'D:\Users\Rando\SomeFolder\ProdDeploymentFolder'
+          test_path: 'D:\Users\Rando\SomeFolder\TestDeploymentFolder'
+          addin_id: 'com.company.addin_name'
+          addin_name: 'addin_name'
+          jmpcust_txt_file: 'myfile.txt'
+```
+
