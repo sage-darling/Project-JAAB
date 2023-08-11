@@ -9,12 +9,17 @@ inputs:
   run_id:
     description: 'The run reference id that triggered the action.'
     default: ${{github.event.release.id}}
-  prod_path:
+  make_meta_file:
+    description: 'Boolean. 1 will make the custom meta data file. 0 will not. defaults to 0.'
+    default: 0
+  final_prod_path:
     description: 'The pathway for the production release of the addin.'
-    required: true
-  test_path:
-    description: 'The pathway for the test release of the addin.'
-    required: true
+    required: false
+    default: ""
+  final_pub_path:
+    description: 'The pathway where the published addin list is located.'
+    required: false
+    default: ""
   addin_id:
     description: 'The addin ID which is how JMP recognizes the addin. Usually in the format com.company.namehere'
     required: true
@@ -43,8 +48,9 @@ runs:
         Token: ${{ inputs.token }}
         OwnerRepo: ${{ inputs.owner_repo }}
         RunID: ${{ inputs.run_id }}
+        MakeMetaFile: ${{ inputs.make_meta_file }}
         ProdPath: ${{ inputs.prod_path }}
-        TestPath: ${{ inputs.test_path }}
+        PubPath: ${{ inputs.final_pub_path }}
         AddinID: ${{ inputs.addin_id }}
         AddinName: ${{ inputs.addin_name }}
         Author: ${{ inputs.author }}

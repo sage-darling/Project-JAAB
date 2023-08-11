@@ -112,8 +112,9 @@ Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
 | token | security token | N/A | false but needed for private repos |
 | owner_repo | repo owner and name using the addin | ${{github.repository}} | true |
 | run_id | run reference id created from publishing | ${{github.event.release.id}} | true |
-| prod_path | the pathway where the production release will be saved | N/A | true |
-| test_path | the pathway where the test release will be saved | N/A | true |
+| make_meta_file | boolean to make the meta data file for auto updates | 0 | false |
+| final_prod_path | the pathway where the production release will be saved | N/A | false |
+| final_pub_path | the pathway where the publishedaddins.jsl is saved | N/A | false |
 | addin_id | the addin id. usually in the format com.company.addin | N/A | true |
 | addin_name | the name of the addin | N/A | true |
 | jmpcust_txt_file | the filename for the text file in [Mandatory Prerequisites](#Mandatory-Prerequisites) to create the addin menu | N/A | true |
@@ -137,7 +138,6 @@ jobs:
         uses: sage-darling/Project-JAAB@v1.0.0
         with:
           prod_path: 'D:\Users\Rando\SomeFolder\ProdDeploymentFolder'
-          test_path: 'D:\Users\Rando\SomeFolder\TestDeploymentFolder'
           addin_id: 'com.company.addin_name'
           addin_name: 'addin_name'
           jmpcust_txt_file: 'myfile.txt'
