@@ -701,7 +701,7 @@ def main():
 
     # write the Custom Meta Data (if applicable), Addin.def and JMP.cust files to the addin location.
     if MAKE_META_FILE != 0:
-        CustomMeta(zip_location, jmp_date, deployment_stage, ver_num, AUTHOR, ADDIN_ID, ADDIN_NAME)
+        CustomMeta(zip_location, jmp_date, deployment_stage, ver_num, AUTHOR, ADDIN_ID, ADDIN_NAME, PROD_PATH, PUB_PATH)
     
     AddinDef(zip_location, ver_num, ADDIN_ID, ADDIN_NAME)
     JMPCust(zip_location, data["tag_name"], ADDIN_ID, JMP_CUST_FILE)
