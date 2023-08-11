@@ -84,7 +84,7 @@ This is the format of the .ini file when importing 1 file:
 ; if the folder to place the file in is in the Main folder, write Main in the foldername location. Otherwise, a new folder will be made inside the addin by the name written here.
 ; repository release version is optional and defaults to latest release.
 ; inputs are separated by commas.
-1 = owner, repo, script-to-include, name-to-call-it, foldername, version-number
+1 = owner, repo, file-to-include, name-to-call-it, foldername, version-number
 ```
 
 This is the format of the .ini file when importing more than 1 file:
@@ -97,8 +97,8 @@ This is the format of the .ini file when importing more than 1 file:
 ; if the folder to place the file in is in the Main folder, write Main in the foldername location. Otherwise, a new folder will be made inside the addin by the name written here.
 ; repository release version is optional and defaults to latest release.
 ; inputs are separated by commas.
-1 = owner, repo, script-to-include, name-to-call-it, foldername, version-number
-2 = owner, repo, script-to-include, name-to-call-it, foldername, version-number
+1 = owner, repo, file-to-include, name-to-call-it, foldername, version-number
+2 = owner, repo, file-to-include, name-to-call-it, foldername, version-number
 ```
 
 All inputs are case sensitive. Replace where it says `owner` with the owner of the github repository for the file you wish to include. Next, replace where it says `repo` with the name of the repository that houses the file. After, write the name of the script that's located in the remote repository that you would like to include in the `script-to-include` location. Don't forget the extension type (ex. .jsl). In a similar format, write the name to call the script in your addin in the `name-to-call-it` location. Don't forget the extension type here as well. Next write the folder name in the `foldername` location. If you would like this in the main folder with your .jsl script, write "main" here. Otherwise, put whatever name you wish! Lastly, replace `version-number` with the version number of the file you'd like from the remote repository. This defaults to latest if it does not exist.
