@@ -375,8 +375,8 @@ def release_data(owner_repo, token, runid):
         for key in release:
             #print(key)
             for keys in key:
-                print(keys)
-                print(key[keys])
+                #print(keys)
+                #print(key[keys])
                 if key[keys] == int(runid):
                     slice = index
                     return release[slice]
@@ -555,7 +555,7 @@ def uploadAsset(addinFinalName, releaseDictionary, addinLocation, token):
     '''
     os.chdir(addinLocation)
     uploadLink = releaseDictionary['upload_url'].split(u"{")[0] + "?name=" + addinFinalName
-    print(uploadLink)
+    #print(uploadLink)
     headers = {
         'Content-Type': 'zip',
         'Authorization': f'token {token}'
