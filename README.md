@@ -112,7 +112,7 @@ Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
 | token | security token | N/A | false but needed for private repos |
 | owner_repo | repo owner and name using the addin | ${{github.repository}} | true |
 | run_id | run reference id created from publishing | ${{github.event.release.id}} | true |
-| make_meta_file | boolean to make the meta data file for auto updates | 0 | false |
+| make_meta_file | boolean to make the meta data file for auto updates. 1 to make it. 0 to not make it. | 0 | false |
 | final_prod_path | the pathway where the production release will be saved | N/A | false |
 | final_pub_path | the pathway where the publishedaddins.jsl is saved | N/A | false |
 | addin_id | the addin id. usually in the format com.company.addin | N/A | true |
