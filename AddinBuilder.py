@@ -700,7 +700,7 @@ def main():
     zip_location = write_release_output(data, TOKEN, save_location)
 
     # write the Custom Meta Data (if applicable), Addin.def and JMP.cust files to the addin location.
-    if MAKE_META_FILE != "0":
+    if MAKE_META_FILE.lower() != "false":
         CustomMeta(zip_location, jmp_date, deployment_stage, ver_num, AUTHOR, ADDIN_ID, ADDIN_NAME, PROD_PATH, PUB_PATH)
     
     AddinDef(zip_location, ver_num, ADDIN_ID, ADDIN_NAME)
@@ -721,9 +721,9 @@ def main():
         pack_up_externals(external_files_dict, zip_location, TOKEN)
 
     # zip up the addin files to create the addin
-    if int(TAG_SUFFIX) == 1:
+    if TAG_SUFFIX.lower() == "true":
         addin_final = ADDIN_NAME + "_" + data["tag_name"]
-    elif int(TAG_SUFFIX) == 0 and deployment_stage == "TEST":
+    elif TAG_SUFFIX.lower() == "false" and deployment_stage == "TEST":
         addin_final = ADDIN_NAME + "_" + data["tag_name"]
     else:
         addin_final = ADDIN_NAME

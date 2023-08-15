@@ -1,5 +1,5 @@
 # Project-JAAB = Just Another Addin Builder
-This action is used to retrieve files from the github repository that is using the action in order to package them to create a JMP Addin to be used with [JMP Software](https://www.jmp.com/en_us/home.html).
+A Github Repository can use this action to package the repository and create a JMP Addin to be used with [JMP Software](https://www.jmp.com/en_us/home.html).
 
 ## Whatcha Lookin' For?
 - [Mandatory Prerequisites](#Mandatory-Prerequisites)
@@ -56,15 +56,15 @@ How to make the necessary edits:
 
 `[Menu Item Name]`: edit this area to be the next menu item that will be after the person selects whatever the `[Header Name]` is. In the case of above, this is `Menu Item Name`.
 
-`[addin name everyone sees]`: edit this to be the name you want everyone to see for this addin. It doesn't need to match anything anywhere else but this is how the person will recognize this addin to use. In the case of above, this is `addin name everyone sees`. **IMPORTANT NOTE: Do not edit the TOOLTAG part of this line in the template. Only edit the [addin name everyone sees] part. TOOLTAG automatically adds the version info to the naming, should `tag_suffix` input from the action be 1**
+`[addin name everyone sees]`: edit this to be the name you want everyone to see for this addin. It doesn't need to match anything anywhere else but this is how the person will recognize this addin to use. In the case of above, this is `addin name everyone sees`. **IMPORTANT NOTE: Do not edit the TOOLTAG part of this line in the template. Only edit the [addin name everyone sees] part. TOOLTAG automatically adds the version info to the naming**
 
-`AdDinIDDoNotTouCHY`: This key says Do Not Touchy for a reason. Therefore, do not touchy. This value is pulled from input `addin_id` from the action. Typically it is something along the lines of `com.companyname.uniquetoolname`.
+`AdDinIDDoNotTouCHY`: This key says Do Not Touchy for a reason. Therefore, do not touchy. This value is pulled from input `addin_id` from the action. Typically it is something along the lines of `com.companyname.uniquetoolname`. In the event you modify this file and have multiple lines that need to pull this value, Project JAAB will replace the `AdDinIDDoNotTouCHY` key with the `addin_id` input whereever it is used. Feel free to use it in another line, should you choose.
 
 `[name of jsl file in addin]`: edit this to be the name of the .jsl you are packaging as the addin. This is the .jsl code you have written and want JMP to recognize and execute when a person clicks this button. Because of the path information above, you only need the jsl name here. Make sure to keep the `.jsl` at the end so that JMP will recognize the code to execute. If this does not match your jsl filename, the button becomes effectively useless.
 
 `[Write a caption to describe the addin]`: edit this to say whatever you want! When a person hovers in JMP over the `[addin name everyone sees]` this caption will appear to describe what the addin does. Try to keep this as a relatively short description. 1 sentence tops. The above example shows "Write a caption to describe the addin"
 
-`[Choose a symbol]`: Here you can get creative about what you want your symbol to look like! This is the symbol that exists next to `addin name everyone sees`. JMP has many `"builtin"` ones you can leverage by using the name that JMP recognizes. If you are unsure, an Addin exists [here](https://community.jmp.com/t5/JMP-Add-Ins/Built-In-JMP-Icons/ta-p/42251#:~:text=Description,be%20set%20as%20window%20icons.) that can help you pick what this is. Find your symbol from this addin, click it, find the Icon Name, and paste that into the `[Choose a symbol]` location.
+`[Choose a symbol]`: Here you can get creative about what you want your symbol to look like! This is the symbol that exists next to `addin name everyone sees`. JMP has many `"builtin"` ones you can leverage by using the name that JMP recognizes. If you are unsure, an Addin exists [here](https://community.jmp.com/t5/JMP-Add-Ins/Built-In-JMP-Icons/ta-p/42251#:~:text=Description,be%20set%20as%20window%20icons.) that can help you pick what this is. Find your symbol from this addin, click it, find the Icon Name, and paste that into the `[Choose a symbol]` location. PRO TIP: You can also set this to be your own image, should you have an image you just can't live without. Change `<jm:icon type="builtin">[Choose a symbol]</jm:icon>` to `<jm:icon type="path">$ADDIN_HOME(AdDinIDDoNotTouCHY)\[name of JPG inside the addin]</jm:icon>`. Replace `[name of JPG inside the addin]` with the name of the JPG image that is saved inside the repository. Viola! You will have your own image as the icon for your addin.
 
 Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
 
@@ -101,29 +101,33 @@ This is the format of the .ini file when importing more than 1 file:
 2 = owner, repo, file-to-include, name-to-call-it, foldername, version-number
 ```
 
-All inputs are case sensitive. Replace where it says `owner` with the owner of the github repository for the file you wish to include. Next, replace where it says `repo` with the name of the repository that houses the file. After, write the name of the script that's located in the remote repository that you would like to include in the `script-to-include` location. Don't forget the extension type (ex. .jsl). In a similar format, write the name to call the script in your addin in the `name-to-call-it` location. Don't forget the extension type here as well. Next write the folder name in the `foldername` location. If you would like this in the main folder with your .jsl script, write "main" here. Otherwise, put whatever name you wish! Lastly, replace `version-number` with the version number of the file you'd like from the remote repository. This defaults to latest if it does not exist.
+All inputs are case sensitive. Start with the file number starting with `1 =`. Continue to increment up for the number of files you'd like to add. Each line can be a separate owner, repo, file, etc. of your choosing. Replace where it says `owner` with the owner of the github repository for the file you wish to include. Next, replace where it says `repo` with the name of the repository that houses the file. After, write the name of the script that's located in the remote repository that you would like to include in the `file-to-include` location. Don't forget the extension type (ex. .jsl). In a similar format, write the name to call the script in your addin in the `name-to-call-it` location. Don't forget the extension type here as well. Next write the folder name in the `foldername` location. If you would like this in the main folder with your .jsl script, write "main" here. Otherwise, put whatever name you wish! Lastly, replace `version-number` with the version number of the file you'd like from the remote repository. This defaults to latest if it does not exist.
 
-Now your `jmpcust_txt_file` input is complete! :sparkles: :sparkles:
+
+Now your `external_files` input is complete! :sparkles: :sparkles:
 
 ## Inputs
 
 | Name | Description | Default | Required |
 | ---- | ----------- | ------- | -------- |
 | token | security token | N/A | false but needed for private repos |
-| owner_repo | repo owner and name using the addin | ${{github.repository}} | true |
-| run_id | run reference id created from publishing | ${{github.event.release.id}} | true |
-| make_meta_file | boolean to make the meta data file for auto updates. 1 to make it. 0 to not make it. | 0 | false |
-| final_prod_path | the pathway where the production release will be saved | N/A | false |
-| final_pub_path | the pathway where the publishedaddins.jsl is saved | N/A | false |
 | addin_id | the addin id. usually in the format com.company.addin | N/A | true |
 | addin_name | the name of the addin | N/A | true |
 | jmpcust_txt_file | the filename for the text file in [Mandatory Prerequisites](#Mandatory-Prerequisites) to create the addin menu | N/A | true |
-| author | the author of the addin. | Empty | true |
-| tag_suffix | whether the final addin includes version tag in the filename. 1 to include. 0 to exclude. | 1 | true |
+| tag_suffix | whether the final addin includes version tag in the filename. true to include. false to exclude. | true | N/A |
+| author | the author of the addin. | "" | N/A |
+| owner_repo | repo owner and name using the addin | ${{github.repository}} | N/A |
+| run_id | run reference id created from publishing | ${{github.event.release.id}} | N/A |
+| make_meta_file | boolean to make the meta data file for auto updates. true to make it. false to not make it. | false | N/A |
+| final_prod_path | the pathway where the production release is saved (goes into publishedaddin.jsl file for auto updates/deployment) | "" | N/A |
+| final_pub_path | the pathway where the publishedaddins.jsl is saved (added to metadata file and used for auto updates/deployment) | "" | N/A |
 | external_files | the .ini file in the [Optional Prerequisites](#optional-prerequisites) for including external files | N/A | false |
+
+N/A is set as there's a default included in the .yml and thus a `with` is not required in the usage for this input. These defaults can be reset with a `with` (see usage).
 
 ## Usage
 
+With all inputs default and only true required:
 ```
 on:
   release:
@@ -135,11 +139,33 @@ jobs:
     steps:
       - name: Example Addin Build with Project JAAB
         id: Project-JAAB
-        uses: sage-darling/Project-JAAB@v1.0.0
+        uses: sage-darling/Project-JAAB@v1.0
         with:
-          prod_path: 'D:\Users\Rando\SomeFolder\ProdDeploymentFolder'
-          addin_id: 'com.company.addin_name'
-          addin_name: 'addin_name'
-          jmpcust_txt_file: 'myfile.txt'
+          addin_id: com.company.addin_name
+          addin_name: addin_name
+          jmpcust_txt_file: myfile.txt
 ```
 
+With true required inputs, with autodeployment, a .ini file to include and not wanting the tag suffix excluded from the filename.
+```
+on:
+  release:
+    types:
+      - published
+jobs:
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Example Addin Build with Project JAAB
+        id: Project-JAAB
+        uses: sage-darling/Project-JAAB@v1.0
+        with:
+          addin_id: com.company.addin_name
+          addin_name: addin_name
+          jmpcust_txt_file: myfile.txt
+          make_meta_file: true
+          tag_suffix: false
+          final_prod_path: D:/Users/Rando/SomeFolder/ProdDeploymentFolder/
+          final_pub_path: D:/Users/Rando/SomeFolder/ProdDeploymentFolder/MetaData/
+          external_files: config.ini
+```

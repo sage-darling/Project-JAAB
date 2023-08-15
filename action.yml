@@ -10,16 +10,16 @@ inputs:
     description: 'The run reference id that triggered the action.'
     default: ${{github.event.release.id}}
   make_meta_file:
-    description: 'Boolean. 1 will make the custom meta data file. 0 will not. defaults to 0.'
-    default: 0
+    description: 'Boolean. true will make the custom meta data file. false will not. defaults to false.'
+    default: false
   final_prod_path:
     description: 'The pathway for the production release of the addin.'
     required: false
-    default: ""
+    default: '""'
   final_pub_path:
     description: 'The pathway where the published addin list is located.'
     required: false
-    default: ""
+    default: '""'
   addin_id:
     description: 'The addin ID which is how JMP recognizes the addin. Usually in the format com.company.namehere'
     required: true
@@ -31,13 +31,13 @@ inputs:
     required: true
   author:
     description: 'The author of the addin. Default is empty'
-    default: ''
+    default: '""'
   external_files:
     description: 'File name that ends with the suffix .ini that exists in the .github/workflows in a specific format (see action README.md) that gives information about other repos to include files from in the addin build.'
     required: false
   tag_suffix:
-    description: 'Boolean. The final addin includes the version tag at the end in the addin name. Set to 1 to include it. Set to 0 to exclude it. Default is 1.'
-    default: 1
+    description: 'Boolean. The final addin includes the version tag at the end in the addin name. Set to true to include it. Set to false to exclude it. Default is true.'
+    default: true
 runs:
   using: "composite"
   steps:
