@@ -12,14 +12,14 @@ inputs:
   make_meta_file:
     description: 'Boolean. true will make the custom meta data file. false will not. defaults to false.'
     default: false
-  final_prod_path:
-    description: 'The pathway for the production release of the addin.'
-    required: false
-    default: '""'
   final_pub_path:
     description: 'The pathway where the published addin list is located.'
     required: false
     default: '""'
+  pub_name:
+    description: 'The pathway where the published addin list is located.'
+    required: false
+    default: 'publishedaddins.jsl'
   addin_id:
     description: 'The addin ID which is how JMP recognizes the addin. Usually in the format com.company.namehere'
     required: true
@@ -49,8 +49,8 @@ runs:
         OwnerRepo: ${{ inputs.owner_repo }}
         RunID: ${{ inputs.run_id }}
         MakeMetaFile: ${{ inputs.make_meta_file }}
-        ProdPath: ${{ inputs.final_prod_path }}
         PubPath: ${{ inputs.final_pub_path }}
+        PubName: ${{ inputs.pub_name }}
         AddinID: ${{ inputs.addin_id }}
         AddinName: ${{ inputs.addin_name }}
         Author: ${{ inputs.author }}

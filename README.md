@@ -56,7 +56,7 @@ How to make the necessary edits:
 
 `[Menu Item Name]`: edit this area to be the next menu item that will be after the person selects whatever the `[Header Name]` is. In the case of above, this is `Menu Item Name`.
 
-`[addin name everyone sees]`: edit this to be the name you want everyone to see for this addin. It doesn't need to match anything anywhere else but this is how the person will recognize this addin to use. In the case of above, this is `addin name everyone sees`. **IMPORTANT NOTE: Do not edit the TOOLTAG part of this line in the template. Only edit the [addin name everyone sees] part. TOOLTAG automatically adds the version info to the naming**
+`[addin name everyone sees]`: edit this to be the name you want everyone to see for this addin. It doesn't need to match anything anywhere else but this is how the person will recognize this addin to use. In the case of above, this is `addin name everyone sees`. **IMPORTANT NOTE: Do not edit the TOOLTAG part of this line in the template. Only edit the [addin name everyone sees] part. TOOLTAG automatically adds the version info to the naming.**
 
 `AdDinIDDoNotTouCHY`: This key says Do Not Touchy for a reason. Therefore, do not touchy. This value is pulled from input `addin_id` from the action. Typically it is something along the lines of `com.companyname.uniquetoolname`. In the event you modify this file and have multiple lines that need to pull this value, Project JAAB will replace the `AdDinIDDoNotTouCHY` key with the `addin_id` input whereever it is used. Feel free to use it in another line, should you choose.
 
@@ -119,7 +119,7 @@ Now your `external_files` input is complete! :sparkles: :sparkles:
 | owner_repo | repo owner and name using the addin | ${{github.repository}} | N/A |
 | run_id | run reference id created from publishing | ${{github.event.release.id}} | N/A |
 | make_meta_file | boolean to make the meta data file for auto updates. true to make it. false to not make it. | false | N/A |
-| final_prod_path | the pathway where the production release is saved (goes into publishedaddin.jsl file for auto updates/deployment) | "" | N/A |
+| pub_name | the name of the publishedaddins.jsl (added to metadata file and used for auto updates/deployment) | publishedaddins.jsl | N/A |
 | final_pub_path | the pathway where the publishedaddins.jsl is saved (added to metadata file and used for auto updates/deployment) | "" | N/A |
 | external_files | the .ini file in the [Optional Prerequisites](#optional-prerequisites) for including external files | N/A | false |
 
@@ -165,7 +165,6 @@ jobs:
           jmpcust_txt_file: myfile.txt
           make_meta_file: true
           tag_suffix: false
-          final_prod_path: D:/Users/Rando/SomeFolder/ProdDeploymentFolder/
           final_pub_path: D:/Users/Rando/SomeFolder/ProdDeploymentFolder/MetaData/
           external_files: config.ini
 ```
