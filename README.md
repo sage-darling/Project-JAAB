@@ -134,7 +134,7 @@ on:
     types:
       - published
 jobs:
-  context:
+  build-addin:
     runs-on: ubuntu-latest
     steps:
       - name: Example Addin Build with Project JAAB
@@ -153,7 +153,7 @@ on:
     types:
       - published
 jobs:
-  context:
+  build-addin:
     runs-on: ubuntu-latest
     steps:
       - name: Example Addin Build with Project JAAB
