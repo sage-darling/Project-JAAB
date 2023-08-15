@@ -49,7 +49,7 @@ Basic File format WITHOUT edits:
 ```
 
 What does this file look like when implemented?:
-![image](https://github.com/sage-darling/Project-JAAB/assets/103757629/82d1db1b-0bfa-4436-8182-3e73ee956fc0)
+![image](https://github.com/sage-darling/Project-JAAB/assets/103757629/fdb1e224-4a0a-4271-a9b9-e65df99a5205)
 
 How to make the necessary edits:
 `[Header Name]`: edit this area of the template to say the naming you would like in the overarching menu location. This is the first section individuals will see and is the header item. In the case above, this is `Header Item`.
