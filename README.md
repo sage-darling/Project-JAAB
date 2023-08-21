@@ -1,6 +1,8 @@
 # Project-JAAB = Just Another Addin Builder
 A Github Repository can use this action to package the repository and create a JMP Addin to be used with [JMP Software](https://www.jmp.com/en_us/home.html).
 
+This action was presented and added to the JMP User Community for the Discovery Summit Americas in 2023. The materials for this presentation, including a recorded clip of usage, can be found [here](https://community.jmp.com/t5/Discovery-Summit-Americas-2023/Take-a-JAAB-at-Add-In-Building-Using-GitHub-Actions-to/ta-p/651650).
+
 ## Whatcha Lookin' For?
 - [Mandatory Prerequisites](#Mandatory-Prerequisites)
 - [Optional Prerequisites](#optional-prerequisites)
