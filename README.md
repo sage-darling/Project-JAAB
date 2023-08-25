@@ -129,6 +129,18 @@ N/A is set as there's a default included in the .yml and thus a `with` is not re
 
 ## Usage
 
+**Versioning for the release tag for use with Project-JAAB:**
+Project-JAAB requires semi-specific versioning when publishing a release in order to accurately record the version information inside the JMP addin files.
+
+The general rules are that numbers can be as long as you want and have as many places as you want, as long as they are separated by periods and no other punctuation with the exception of an RC, Beta, or Alpha designation. Additionally, `v` for version can be included at the beginning if you would like, but it is not required.
+
+Project-JAAB allows the versioning to include a `RC` (standing for Release Candidate), `Beta`, or `Alpha` designation at the end of the version, should this fit your workflow. Just remember that `RC`, `Beta`, and `Alpha` also require a number designation to denote it's own version traceability. An example of this is that version `1.0.0` may be the version that will eventually be the production version, but the `RC` we are releasing is the 1st one. Thus, this version would be `1.0.0-RC1`. `RC`, `Beta`, and `Alpha` are taken into account in the versioning numbering inside both the addin.def file as well as the meta file when used. 
+
+Examples of acceptable versioning:
+`v1.0.0`, `1.0.0`, `1.0`, `v1.0`, `1.0-RC1`, `v1.0-Beta1`
+Unacceptable versioning:
+`1-0-0`, `1.0-0`, `v1/0/0`, `1.0-RC`, `v1.0-Beta` `1_0`
+
 With all inputs default and only true required:
 ```
 on:
