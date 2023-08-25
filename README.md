@@ -138,6 +138,7 @@ Project-JAAB allows the versioning to include a `RC` (standing for Release Candi
 
 Examples of acceptable versioning:
 `v1.0.0`, `1.0.0`, `1.0`, `v1.0`, `1.0-RC1`, `v1.0-Beta1`
+
 Unacceptable versioning:
 `1-0-0`, `1.0-0`, `v1/0/0`, `1.0-RC`, `v1.0-Beta` `1_0`
 
