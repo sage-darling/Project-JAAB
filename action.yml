@@ -1,5 +1,8 @@
 name: 'Project-JAAB'
 description: 'Create a JMP Addin with repository files and optional other repository files.'
+branding:
+  icon: 'cloud-lightning'
+  color: 'blue'
 inputs:
   token:
     description: 'Security token to use as access to certain repositories. Required for private repositories'
